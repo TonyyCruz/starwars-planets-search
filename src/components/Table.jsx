@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import useApi from '../hooks/useApi';
-import useFilter from '../hooks/useFilter';
+import React, { useState, useEffect, useContext } from 'react';
+import MyContext from '../context/MyContext';
+// import useApi from '../hooks/useApi';
+// import useFilter from '../hooks/useFilter';
 
 export default function Table() {
   const [tableData, setTableData] = useState([]);
+  // const [imputText, setImputText] = useState('');
 
-  const apiData = useApi('https://swapi-trybe.herokuapp.com/api/planets/');
-  const filtredData = useFilter(apiData.results);
+  const { apiData } = useContext(MyContext);
 
   useEffect(() => {
-    setTableData(filtredData);
-  }, [setTableData, filtredData]);
-  console.log('Table component', tableData);
+    setTableData(apiData);
+  }, [apiData]);
 
   return (
     <table>
